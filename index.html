@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Curso: Implementación Sistema Digital (Grupo Bimbo)</title>
+  <meta name="description" content="Curso: Implementación del Sistema Digital de Control y Optimización de Inventarios - Grupo Bimbo" />
+  <style>
+    /* ------- Reset y base ------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin:0;
+      background: #f4f6f9;
+      color:#1f2937;
+      line-height:1.45;
+    }
+    a{color:#0b5fff;text-decoration:none}
+    a.btn{display:inline-block;background:#0b5fff;color:#fff;padding:10px 14px;border-radius:8px;}
+    header{
+      background: linear-gradient(90deg,#0646c0 0%,#0b5fff 100%);
+      color:white;
+      padding:26px 20px;
+      box-shadow: 0 6px 18px rgba(6,40,98,0.15);
+    }
+    .wrap{
+      max-width:1100px;margin:20px auto;padding:0 18px;
+    }
+    .course-title{display:flex;gap:18px;align-items:center}
+    .logo{
+      width:78px;height:78px;border-radius:10px;background:white;color:#0646c0;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:18px;
+      box-shadow:0 6px 18px rgba(6,40,98,0.12)
+    }
+    .meta{opacity:0.95}
+    .grid{
+      display:grid;grid-template-columns: 320px 1fr;gap:20px;margin-top:20px;
+    }
+    /* ------- panel izquierdo (nav) ------- */
+    .panel{
+      background:white;padding:18px;border-radius:12px;box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+      height: fit-content;
+    }
+    nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+    nav li a{display:block;padding:10px;border-radius:8px;border:1px solid transparent}
+    nav li a:hover{background:#f1f5f9}
+    .section-title{font-weight:700;margin:12px 0}
+    .small{font-size:13px;color:#475569}
+    /* ------- contenido principal ------- */
+    .card{
+      background:white;padding:18px;border-radius:12px;box-shadow: 0 6px 18px rgba(15,23,42,0.06)
+    }
+    h2{margin:0 0 10px 0}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .badge{display:inline-block;background:#eef2ff;color:#0b5fff;padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px}
+    .module{border-left:4px solid #f1f5f9;padding-left:12px;margin-bottom:12px}
+    .module.active{border-left-color:#0b5fff}
+    .resource{padding:10px;border:1px dashed #e6eefc;border-radius:8px;margin:8px 0}
+    /* quiz */
+    .quiz-question{padding:12px;border-radius:8px;background:#fbfdff;border:1px solid #eef2ff;margin-bottom:10px}
+    .quiz-options label{display:block;padding:6px 6px;border-radius:6px;margin:6px 0;border:1px solid transparent}
+    .quiz-options input[type="radio"]{margin-right:8px}
+    .quiz-options label:hover{background:#f8fafc}
+    /* foro */
+    .forum-post{padding:12px;border-radius:8px;background:#ffffff;border:1px solid #eef2ff;margin-bottom:10px}
+    .forum-form textarea{width:100%;min-height:80px;padding:8px;border-radius:8px;border:1px solid #dbeafe}
+    .btn-secondary{background:#e2e8f0;color:#0b1220;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    .btn-primary{background:#0b5fff;color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+    .muted{color:#64748b;font-size:13px}
+    footer{margin:28px 0 80px 0;text-align:center;color:#64748b}
+    /* responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr; padding-bottom:40px}
+      .logo{width:58px;height:58px}
+    }
+    /* table */
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border:1px solid #eef2ff;text-align:left}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap course-title">
+      <div class="logo">BIMBO</div>
+      <div>
+        <h1 style="margin:0;font-size:20px">Implementación del Sistema Digital de Control y Optimización de Inventarios</h1>
+        <div class="meta small">Organización: Grupo Bimbo • Área: Informática Administrativa • Modalidad: Virtual, colaborativa</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <!-- NAV -->
+      <aside class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Contenido del curso</strong>
+          <span class="small muted">Duración: 4 semanas</span>
+        </div>
+        <nav style="margin-top:12px">
+          <ul>
+            <li><a href="#" onclick="showPanel('inicio');return false">Inicio</a></li>
+            <li><a href="#" onclick="showPanel('modulo1');return false">Módulo 1 - Diagnóstico</a></li>
+            <li><a href="#" onclick="showPanel('modulo2');return false">Módulo 2 - Operación</a></li>
+            <li><a href="#" onclick="showPanel('modulo3');return false">Módulo 3 - Pruebas</a></li>
+            <li><a href="#" onclick="showPanel('modulo4');return false">Módulo 4 - Evaluación</a></li>
+            <li><a href="#" onclick="showPanel('foro');return false">Foro colaborativo</a></li>
+            <li><a href="#" onclick="showPanel('quiz');return false">Quiz Módulo 1</a></li>
+            <li><a href="#" onclick="showPanel('evidencia');return false">Entrega de evidencia</a></li>
+            <li><a href="#" onclick="showPanel('reportes');return false">Reportes</a></li>
+          </ul>
+        </nav>
+
+        <div style="margin-top:18px">
+          <div class="section-title">Roles</div>
+          <div class="small">Admin / Profesor / Alumno</div>
+          <div style="margin-top:8px">
+            <strong class="small">Matrícula</strong>
+            <div class="muted small">Autoinscripción (clave)</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <div class="section-title">Evaluación</div>
+          <div class="small">Quiz 30% • Foro 30% • Tarea práctica 40%</div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <section>
+        <!-- INICIO -->
+        <div id="panel-inicio" class="card" style="display:block">
+          <h2>Bienvenida</h2>
+          <p>Bienvenido/a al curso de <strong>Implementación del Sistema Digital de Control y Optimización de Inventarios</strong>. Aquí aprenderás a diagnosticar, operar y evaluar el nuevo sistema que se integrará con ERP SAP y Power BI.</p>
+
+          <div style="margin-top:12px" class="row">
+            <div class="badge">Objetivo: Capacitar</div>
+            <div class="badge">Modalidad: Virtual</div>
+            <div class="badge">Colaborativo: Sí (parejas)</div>
+          </div>
+
+          <div style="margin-top:16px">
+            <h3>Descripción rápida</h3>
+            <p class="muted">Sigue el orden: Módulo 1 → Módulo 2 → Módulo 3 → Módulo 4. Completa foros, quizes y sube tu evidencia al final.</p>
+
+            <div style="margin-top:12px" class="row">
+              <a class="btn" href="#modulos" onclick="document.getElementById('panel-modulo1').scrollIntoView();return false">Ir a módulos</a>
+              <button class="btn-secondary" onclick="downloadTemplate()">Descargar plantilla diagnóstico (PDF)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 1 -->
+        <div id="panel-modulo1" class="card" style="display:none">
+          <h2>Módulo 1 — Diagnóstico de procesos de inventario</h2>
+          <p class="muted">Objetivo del tema: Identificar y documentar el estado actual de los procesos de inventario en planta.</p>
+
+          <div class="module active">
+            <h3>Contenido</h3>
+            <div class="resource">
+              <strong>Introducción</strong>
+              <p>Aprenderás a mapear procesos (recepción, almacenamiento, picking, despacho), identificar puntos de riesgo y documentar responsables y tiempos.</p>
+            </div>
+
+            <div class="resource">
+              <strong>Procedimiento</strong>
+              <ol>
+                <li>Revisar registros históricos de inventario.</li>
+                <li>Mapear procesos y responsables.</li>
+                <li>Identificar controles manuales y automáticos.</li>
+                <li>Documentar tiempos y responsables.</li>
+              </ol>
+            </div>
+
+            <div class="resource">
+              <strong>Video sugerido</strong>
+              <p class="muted">Demo corta (8–12 min)</p>
+              <!-- Video embebido de ejemplo (reemplaza con URL real si lo tienes) -->
+              <div style="position:relative;padding-top:56.25%;height:0;overflow:hidden;border-radius:8px;border:1px solid #eef2ff">
+                <iframe src="https://www.youtube.com/embed/Igq3yToMC1A" title="Video ejemplo" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0" allowfullscreen></iframe>
+              </div>
+            </div>
+
+            <div class="resource">
+              <strong>Resultados esperados</strong>
+              <ul>
+                <li>Lista de 10 mejoras prioritarias</li>
+                <li>Matriz RACI de actividades de inventario</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h3>Actividad colaborativa (Foro)</h3>
+            <p class="muted">Publica tu diagnóstico (máx. 300 palabras) y responde a 2 compañeros.</p>
+            <div class="forum-form">
+              <input id="forum-name" placeholder="Tu nombre" style="padding:8px;border-radius:8px;border:1px solid #e2e8f0;width:100%;margin-bottom:8px" />
+              <textarea id="forum-msg" placeholder="Escribe tu diagnóstico aquí..."></textarea>
+              <div style="margin-top:8px"><button class="btn-primary" onclick="postToForum()">Publicar en foro</button></div>
+            </div>
+
+            <div id="forum-area" style="margin-top:12px"></div>
+          </div>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div id="panel-modulo2" class="card" style="display:none">
+          <h2>Módulo 2 — Operación del sistema</h2>
+          <div class="resource">
+            <p>Contenidos para operar: ingreso de SKU, control de lotes, cierres de inventario y sincronización con SAP.</p>
+          </div>
+          <div class="resource">
+            <strong>Actividad sugerida:</strong> Simulación de entrada/salida de stock en hoja de cálculo y captura en sistema.
+          </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div id="panel-modulo3" class="card" style="display:none">
+          <h2>Módulo 3 — Pruebas y validación</h2>
+          <p class="muted">Realizar pruebas piloto en 2 plantas. Documentar errores y propuestas de fix.</p>
+        </div>
+
+        <!-- Módulo 4 -->
+        <div id="panel-modulo4" class="card" style="display:none">
+          <h2>Módulo 4 — Evaluación y seguimiento</h2>
+          <p class="muted">Uso de Power BI para reportes y KPIs: días de inventario, rotación, pérdidas por caducidad.</p>
+        </div>
+
+        <!-- FORO -->
+        <div id="panel-foro" class="card" style="display:none">
+          <h2>Foro colaborativo</h2>
+          <p class="muted">Consulta y debate entre participantes.</p>
+          <div id="forum-main" style="margin-top:12px"></div>
+        </div>
+
+        <!-- QUIZ -->
+        <div id="panel-quiz" class="card" style="display:none">
+          <h2>Quiz — Módulo 1</h2>
+          <p class="muted">10 preguntas. Responde y obtén tu puntaje inmediato.</p>
+
+          <form id="quiz-form">
+            <!-- Preguntas generadas por JS -->
+          </form>
+
+          <div style="margin-top:12px">
+            <button class="btn-primary" onclick="submitQuiz()">Enviar quiz</button>
+            <button class="btn-secondary" onclick="resetQuiz()" style="margin-left:8px">Reiniciar</button>
+            <div id="quiz-result" style="margin-top:12px"></div>
+          </div>
+        </div>
+
+        <!-- EVIDENCIA -->
+        <div id="panel-evidencia" class="card" style="display:none">
+          <h2>Entrega de evidencia</h2>
+          <p class="muted">Sube tu PDF con el diagnóstico y una foto o captura (simulado en local).</p>
+
+          <div style="margin-top:10px">
+            <input type="file" id="file-evidence" accept=".pdf,image/*" />
+            <div style="margin-top:8px">
+              <button class="btn-primary" onclick="saveEvidence()">Guardar evidencia (simulado)</button>
+              <span id="evidence-msg" class="muted" style="margin-left:10px"></span>
+            </div>
+            <div id="evidence-list" style="margin-top:12px"></div>
+          </div>
+        </div>
+
+        <!-- REPORTES -->
+        <div id="panel-reportes" class="card" style="display:none">
+          <h2>Reportes de seguimiento</h2>
+          <p class="muted">Exporta el progreso de participantes en CSV (simulado).</p>
+
+          <div style="margin-top:12px">
+            <table id="report-table">
+              <thead>
+                <tr><th>No.</th><th>Alumno</th><th>Actividad</th><th>Fecha</th><th>Estado</th><th>Calificación</th><th>Observaciones</th></tr>
+              </thead>
+              <tbody>
+                <!-- filas inyectadas por JS -->
+              </tbody>
+            </table>
+
+            <div style="margin-top:12px">
+              <button class="btn-primary" onclick="exportCSV()">Exportar CSV</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <footer>Plantilla creada para la actividad A26 — Grupo Bimbo. Generado localmente como maqueta.</footer>
+  </main>
+
+<script>
+/* ===============================
+   Datos iniciales (plantilla)
+   =============================== */
+const quizQuestions = [
+  {
+    q: "¿Cuál es la principal causa de sobrestock?",
+    options: ["Mala previsión de demanda","Falta de espacio","Falta de empleados","Otros"],
+    correct: 0
+  },
+  {
+    q: "¿Qué documento se usa para trazar responsabilidades?",
+    options: ["Matriz RACI","Inventario físico","Plan de compras","Ninguno"],
+    correct: 0
+  },
+  {
+    q: "¿Qué indicador mide la rotación de inventario?",
+    options: ["Días de inventario en mano","Tiempo de picking","Coste del almacenamiento","Número de SKU"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál es una política de seguridad para acceso al sistema?",
+    options: ["Contraseñas robustas y MFA","Compartir credenciales","No actualización de contraseñas","Contraseñas fáciles"],
+    correct: 0
+  },
+  {
+    q: "¿Qué herramienta se propone para reportes administrativos?",
+    options: ["Power BI","Excel simple","Bloc de notas","Word"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál es la ventaja principal de integrar con ERP SAP?",
+    options: ["Trazabilidad y sincronización de datos","Menor seguridad","Costos adicionales sin beneficio","Solo estético"],
+    correct: 0
+  },
+  {
+    q: "¿Qué lenguaje se menciona para desarrollo backend?",
+    options: ["Python/PHP","COBOL","Java","Ruby"],
+    correct: 0
+  },
+  {
+    q: "La validación en planta se realiza durante:",
+    options: ["Pruebas piloto","Implementación nacional","Capacitación final","Ninguna"],
+    correct: 0
+  },
+  {
+    q: "Un beneficio esperado es:",
+    options: ["Reducción del 30% en errores de inventario","Aumento del 100% en costos","Menor control administrativo","Menos trazabilidad"],
+    correct: 0
+  },
+  {
+    q: "¿Qué se debe documentar en el diagnóstico?",
+    options: ["Procesos, tiempos y responsables","Solo responsables","Solo tiempos","No documentar"],
+    correct: 0
+  }
+];
+
+const sampleReport = [
+  {alumno:"Juan Pérez",actividad:"Foro — Diagnóstico",fecha:"2025-11-10",estado:"Completado",calificacion:9,obs:"Buenas evidencias"},
+  {alumno:"Ana López",actividad:"Quiz módulo 1",fecha:"2025-11-12",estado:"Completado",calificacion:8,obs:"Requiere refuerzo en RACI"}
+];
+
+/* ===============================
+   Navegación de paneles
+   =============================== */
+function showPanel(id){
+  const panels = ['inicio','modulo1','modulo2','modulo3','modulo4','foro','quiz','evidencia','reportes'];
+  panels.forEach(p=>{
+    const elem = document.getElementById('panel-'+p);
+    if(!elem) return;
+    if(p===id) elem.style.display='block'; else elem.style.display='none';
+  });
+  // if module1 vs quiz etc - for anchor nav
+  if(id==='foro') { renderForum(); }
+  if(id==='quiz') { renderQuiz(); }
+  if(id==='reportes') { renderReportTable(); }
+}
+
+/* ===============================
+   Foro simple (localStorage)
+   =============================== */
+function postToForum(){
+  const name = document.getElementById('forum-name').value.trim() || 'Anon';
+  const msg = document.getElementById('forum-msg').value.trim();
+  if(!msg){ alert('Escribe tu diagnóstico antes de publicar.'); return; }
+  const posts = JSON.parse(localStorage.getItem('bimbo_forum')||'[]');
+  posts.unshift({name, msg, date: new Date().toISOString()});
+  localStorage.setItem('bimbo_forum', JSON.stringify(posts));
+  document.getElementById('forum-msg').value='';
+  renderForum();
+}
+
+function renderForum(){
+  const area = document.getElementById('forum-area') || document.getElementById('forum-main');
+  if(!area) return;
+  const posts = JSON.parse(localStorage.getItem('bimbo_forum')||'[]');
+  if(posts.length===0){
+    area.innerHTML = '<div class="muted">No hay publicaciones aún. Sé el primero en publicar tu diagnóstico.</div>';
+    return;
+  }
+  area.innerHTML = posts.map(p=>{
+    const d = new Date(p.date).toLocaleString();
+    return `<div class="forum-post"><strong>${escapeHtml(p.name)}</strong> <span class="muted" style="font-size:12px;margin-left:8px">${d}</span><p style="margin:8px 0">${escapeHtml(p.msg)}</p></div>`;
+  }).join('');
+}
+
+/* ===============================
+   Quiz (render y submit)
+   =============================== */
+function renderQuiz(){
+  const form = document.getElementById('quiz-form');
+  form.innerHTML = '';
+  quizQuestions.forEach((q,i)=>{
+    const qHtml = document.createElement('div');
+    qHtml.className = 'quiz-question';
+    qHtml.innerHTML = `<div><strong>Pregunta ${i+1}.</strong> ${escapeHtml(q.q)}</div>
+      <div class="quiz-options" id="q${i}">
+      ${q.options.map((opt,idx)=>`<label><input type="radio" name="q${i}" value="${idx}"> ${escapeHtml(opt)}</label>`).join('')}
+      </div>`;
+    form.appendChild(qHtml);
+  });
+}
+
+function submitQuiz(){
+  let score = 0;
+  quizQuestions.forEach((q,i)=>{
+    const els = document.getElementsByName('q'+i);
+    let chosen = null;
+    for(const e of els) if(e.checked){ chosen = parseInt(e.value); break; }
+    if(chosen === q.correct) score++;
+  });
+  const percent = Math.round((score / quizQuestions.length) * 100);
+  const resultDiv = document.getElementById('quiz-result');
+  resultDiv.innerHTML = `<div style="padding:10px;border-radius:8px;background:#ecfeff;border:1px solid #c8f7ff">
+    <strong>Puntaje:</strong> ${score} / ${quizQuestions.length} (${percent}%)</div>`;
+  // Guardar en reportes local
+  saveReportEntry({alumno: prompt("Ingresa tu nombre para registrar la calificación:", "Alumno"), actividad:"Quiz módulo 1", fecha: new Date().toISOString().split('T')[0], estado:"Completado", calificacion: percent, obs:"Autoevaluación"});
+}
+
+function resetQuiz(){
+  document.getElementById('quiz-form').reset();
+  document.getElementById('quiz-result').innerHTML = '';
+}
+
+/* ===============================
+   Guardar evidencia (simulado)
+   =============================== */
+function saveEvidence(){
+  const fileInput = document.getElementById('file-evidence');
+  const files = fileInput.files;
+  if(!files || files.length===0){ alert('Selecciona un archivo antes de guardar.'); return; }
+  const saved = JSON.parse(localStorage.getItem('bimbo_evidences')||'[]');
+  for(const f of files){
+    // guardamos solo metadata (no el archivo en base64 para evitar pesados)
+    saved.unshift({name:f.name,size:f.size,date:new Date().toISOString()});
+  }
+  localStorage.setItem('bimbo_evidences', JSON.stringify(saved));
+  document.getElementById('evidence-msg').textContent = 'Evidencia guardada (simulado).';
+  renderEvidenceList();
+}
+
+function renderEvidenceList(){
+  const list = JSON.parse(localStorage.getItem('bimbo_evidences')||'[]');
+  const container = document.getElementById('evidence-list');
+  if(!container) return;
+  if(list.length===0){ container.innerHTML = '<div class="muted">No hay evidencias guardadas aún.</div>'; return; }
+  container.innerHTML = list.map((e,idx)=>`<div style="padding:8px;border-radius:8px;border:1px solid #eef2ff;margin-bottom:8px">
+    <strong>${escapeHtml(e.name)}</strong> <span class="muted" style="margin-left:8px">(${Math.round(e.size/1024)} KB)</span>
+    <div class="small muted">Fecha: ${new Date(e.date).toLocaleString()}</div>
+  </div>`).join('');
+}
+
+/* ===============================
+   Reportes (tabla y export CSV)
+   =============================== */
+function renderReportTable(){
+  // merge sampleReport + saved quiz entries
+  const savedReports = JSON.parse(localStorage.getItem('bimbo_reports')||'[]');
+  const all = [...savedReports].reverse().concat(sampleReport); // muestra guardados primero
+  const tbody = document.querySelector('#report-table tbody');
+  tbody.innerHTML = all.map((r,idx)=>`<tr>
+    <td>${idx+1}</td>
+    <td>${escapeHtml(r.alumno)}</td>
+    <td>${escapeHtml(r.actividad)}</td>
+    <td>${escapeHtml(r.fecha)}</td>
+    <td>${escapeHtml(r.estado)}</td>
+    <td>${escapeHtml(String(r.calificacion))}</td>
+    <td>${escapeHtml(r.obs||'')}</td>
+  </tr>`).join('');
+}
+
+function exportCSV(){
+  const headers = ["No","Alumno","Actividad","Fecha","Estado","Calificacion","Observaciones"];
+  const rows = [];
+  const tbody = document.querySelectorAll('#report-table tbody tr');
+  tbody.forEach((tr,i)=>{
+    const cols = [...tr.querySelectorAll('td')].map(td=>td.innerText.replace(/\n/g,' ').trim());
+    rows.push(cols);
+  });
+  let csv = headers.join(',') + '\n' + rows.map(r=>r.map(cell=>`"${cell.replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url;
+  a.download='reporte_seguimiento.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* ===============================
+   Guardar reportes (desde quiz)
+   =============================== */
+function saveReportEntry(entry){
+  if(!entry || !entry.alumno) return;
+  const saved = JSON.parse(localStorage.getItem('bimbo_reports')||'[]');
+  saved.push(entry);
+  localStorage.setItem('bimbo_reports', JSON.stringify(saved));
+  renderReportTable();
+}
+
+/* ===============================
+   Helpers
+   =============================== */
+function escapeHtml(s){
+  if(!s) return '';
+  return String(s).replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+  });
+}
+
+/* Descargar plantilla (simulada) */
+function downloadTemplate(){
+  const text = "Plantilla diagnóstico - Implementación Sistema Digital\\n\\nInstrucciones:\\n1) Describir procesos actuales\\n2) Incluir tiempos y responsables\\n3) Adjuntar evidencia (foto o captura)\\n";
+  const blob = new Blob([text],{type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Plantilla_Diagnostico.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* Inicialización */
+(function init(){
+  renderForum();
+  renderQuiz();
+  renderEvidenceList();
+  renderReportTable();
+})();
+</script>
+</body>
+</html>
